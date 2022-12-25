@@ -1,8 +1,13 @@
 .home__bg {
-    background-image: url(https://unsplash.com/photos/SKHq5rmFO24/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8Mjg1fHxjaGF0fGVufDB8fHx8MTY3MTkyMDcxOQ&force=true);
+    background-image: url(https://unsplash.com/photos/gFgKa_ftMOE/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8ODB8fGNoYXR8ZW58MHx8fHwxNjcxOTAxMTI1&force=true);
     height: 92vh;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     overflow-x: hidden;
+}
+
+.home-message-icon {
+    margin-left: 10px;
+    display: inline-block;
 }
