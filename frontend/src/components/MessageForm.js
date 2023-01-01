@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Form, Row, Col } from 'react-bootstrap';
+import './MessageForm.css';
 
 function MessageForm() {
   function handleSubmit(e) {
@@ -7,7 +8,7 @@ function MessageForm() {
   }
   return (
     <>
-      <div className="message-output"></div>
+      <div className="messages-output"></div>
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={11}>
