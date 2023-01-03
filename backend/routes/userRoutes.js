@@ -32,3 +32,5 @@ router.post('/login', async (req, res) => {
     res.status(400).json(e.message);
   }
 });
+
+module.exports = router;
