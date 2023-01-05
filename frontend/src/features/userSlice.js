@@ -21,6 +21,6 @@ export const userSlice = createSlice({
       (state, { payload }) => payload
     );
     // logout destroy user session
-    // builder.addMatcher(appApi.endpoints.signupUser.matchFulfilled, () => null);
+    builder.addMatcher(appApi.endpoints.signupUser.matchFulfilled, () => null);
   },
 });
