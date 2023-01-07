@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import appApi from '../services/appAPi';
 
-// export const userSlice = createSlice({
-//   name: 'user',
-//   initialState: null,
-//   reducers: {
-//     addNotifications: (state, { payload }) => {},
-//     resetNotifications: (state, { payload }) => {},
-//   },
+export const userSlice = createSlice({
+  name: 'user',
+  initialState: null,
+  reducers: {
+    addNotifications: (state, { payload }) => {},
+    resetNotifications: (state, { payload }) => {},
+  },
 
   extraReducers: (builder) => {
     // save user after signup
@@ -24,3 +24,6 @@ import appApi from '../services/appAPi';
     builder.addMatcher(appApi.endpoints.signupUser.matchFulfilled, () => null);
   },
 });
+
+export const { addNotifications, resetNotifications } = userSlice.actions;
+export default userSlice.reducer;
