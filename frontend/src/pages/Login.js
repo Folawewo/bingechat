@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
 import { Col, Row, Container, Form, Button } from 'react-bootstrap';
+import { useLoginUserMutation } from '../services/appAPi';
 import { Link } from 'react-router-dom';
 import './Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginUser, { isLoading, error }] = useLoginUserMutation;
 
   function handleLogin(e) {
     e.preventDefault();
     // login logic
+    loginUser({email, password}).then(({data}) => {
+      if(data) {
+        
+      }
+    })
   }
 
   return (

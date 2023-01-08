@@ -9,7 +9,7 @@ function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [signupUser, {isLoading, error}] = useSignupUserMutation;
+  const [signupUser, { isLoading, error }] = useSignupUserMutation;
 
   // image upload states
   const [image, setImage] = useState(null);
@@ -54,6 +54,11 @@ function Signup() {
     const url = await uploadImage(image);
     console.log(url);
     // signup user
+    signupUser({ name, email, password, picture: url }).then(({ data }) => {
+      if (data) {
+        console.log(data);
+      }
+    });
   }
 
   return (
