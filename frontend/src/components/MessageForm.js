@@ -1,14 +1,18 @@
 import React from 'react';
 import { Button, Form, Row, Col } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import './MessageForm.css';
 
 function MessageForm() {
   function handleSubmit(e) {
     e.preventDefault();
   }
+  const user = useSelector((state) => state.user);
   return (
     <>
-      <div className="messages-output"></div>
+      <div className="messages-output">
+        {!user && <div className="alert alert-danger">Please login</div>}
+      </div>
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={11}>
@@ -16,6 +20,7 @@ function MessageForm() {
               <Form.Control
                 type="text"
                 placeholder="Your message"
+                disabled={!user}
               ></Form.Control>
             </Form.Group>
           </Col>
