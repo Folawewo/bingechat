@@ -17,21 +17,32 @@ function App() {
   const [newMessages, setNewMessages] = useState({});
   const user = useSelector((state) => state.user);
   return (
-    <AppContext>
-    <BrowserRouter>
-      <Navigation />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {!user && (
-          <>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-          </>
-        )}
-        <Route path="/chat" element={<Chat />} />
-      </Routes>
-    </BrowserRouter>
-    </AppContext>
+    <AppContext.Provider
+      value={{
+        socket,
+        currentRoom,
+        setCurrentRoom,
+        members,
+        setMembers,
+        messages,
+        setMessages,
+        privateMembersMsg,
+      }}
+    >
+      <BrowserRouter>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {!user && (
+            <>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+            </>
+          )}
+          <Route path="/chat" element={<Chat />} />
+        </Routes>
+      </BrowserRouter>
+    </AppContext.Provider>
   );
 }
 
