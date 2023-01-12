@@ -17,6 +17,7 @@ function App() {
   const [newMessages, setNewMessages] = useState({});
   const user = useSelector((state) => state.user);
   return (
+    <AppContext>
     <BrowserRouter>
       <Navigation />
       <Routes>
@@ -30,6 +31,7 @@ function App() {
         <Route path="/chat" element={<Chat />} />
       </Routes>
     </BrowserRouter>
+    </AppContext>
   );
 }
 
