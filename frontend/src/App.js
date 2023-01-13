@@ -27,6 +27,11 @@ function App() {
         messages,
         setMessages,
         privateMembersMsg,
+        setPrivateMemberMsg,
+        rooms,
+        setRooms,
+        newMessages,
+        setNewMessages,
       }}
     >
       <BrowserRouter>

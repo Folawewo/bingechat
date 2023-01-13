@@ -25,6 +25,18 @@ const io = require('socket.io')(server, {
   },
 });
 
+app.get('/rooms', () => {
+  res.json(rooms);
+});
+
+// socket connection
+
+io.on('connection', (socket) => {
+  socket.on('join-room', async (room) => {
+    socket.join(room);
+  });
+});
+
 server.listen(PORT, () => {
   console.log(`listening to port ${PORT}...`);
 });
