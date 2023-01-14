@@ -3,6 +3,7 @@ const cors = require('cors');
 require('./connection');
 
 const userRoutes = require('./routes/userRoutes');
+const Message = require('./models/Message');
 
 const app = express();
 
@@ -29,12 +30,18 @@ app.get('/rooms', () => {
   res.json(rooms);
 });
 
+async function getLastMessagesFromRoom(room){
+  let roomMessages = await Message.aggregate([
+    {$match}
+  ])
+}
+
 // socket connection
 
 io.on('connection', (socket) => {
   socket.on('join-room', async (room) => {
     socket.join(room);
-  });
+  }); ``
 });
 
 server.listen(PORT, () => {
