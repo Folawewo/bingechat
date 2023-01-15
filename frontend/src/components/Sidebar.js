@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ListGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { AppContext } from '../context/appContext';
 
 function Sidebar() {
   const rooms = ['first room', 'second room', 'third room'];
   const user = useSelector((state) => state.user);
-  if(!user) {
-    return <></>
+  const {
+    socket,
+    setMembers,
+    members,
+    setCurrentRoom,
+    setRooms,
+    privateMmemberMsg,
+    rooms,
+    setPrivateMemberMsg,
+    currentRoom,
+  } = useContext(AppContext);
+  socket.off('new-user').on('new-user', (payload) => {
+    console.log(payload);
+  });
+  if (!user) {
+    return <></>;
   }
   return (
     <>
