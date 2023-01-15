@@ -30,18 +30,30 @@ app.get('/rooms', () => {
   res.json(rooms);
 });
 
-async function getLastMessagesFromRoom(room){
+async function getLastMessagesFromRoom(room) {
   let roomMessages = await Message.aggregate([
-    {$match}
-  ])
+    { $match: { to: room } },
+    { group: { _id: '$date', messageByDate: { $push: '$$ROOT' } } },
+  ]);
+  return roomMessages;
+}
+
+function sortRoomMessagesByDate(messages) {
+  return messages.sort(function(a, b) {
+    let date1 = a._id.split('/')
+  })
 }
 
 // socket connection
 
 io.on('connection', (socket) => {
+
   socket.on('join-room', async (room) => {
     socket.join(room);
-  }); ``
+    let roomMessages = await getLastMessagesFromRoom()
+
+  });
+  ``;
 });
 
 server.listen(PORT, () => {
