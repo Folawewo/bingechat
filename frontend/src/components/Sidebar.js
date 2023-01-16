@@ -21,7 +21,9 @@ function Sidebar() {
     if (user) {
       setCurrentRoom('general');
       getRooms();
+
       socket.emit('join-room', 'general');
+      socket.emit('new-user');
     }
   });
 
