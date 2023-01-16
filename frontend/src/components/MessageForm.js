@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import './MessageForm.css';
 
 function MessageForm() {
+  const [message, setMessage] = useState('');
+
+  function getFormattedDate() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = (1 + date.gerMonth()).toString();
+
+    month = month.lenght > 1 ? month : '0' + month;
+    const day = date.getDate().toString();
+
+    day = day.length > 1 ? day : '0' + day;
+
+    return month + '/' + day + '/' + year;
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
   }
