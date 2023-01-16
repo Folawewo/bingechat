@@ -5,6 +5,7 @@ require('./connection');
 const userRoutes = require('./routes/userRoutes');
 const Message = require('./models/Message');
 const User = require('./models/User');
+const { emit } = require('process');
 
 const app = express();
 
@@ -76,6 +77,8 @@ io.on('connection', (socket) => {
     });
     let roomMessages = await getLastMessagesFromRoom(room);
     roomMessages = sortRoomMessagesByDate(roomMessages);
+    // sending message to room
+    io.to(room).emit('room-messages', roomMessages);
   });
 });
 
