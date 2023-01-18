@@ -6,16 +6,17 @@ import './MessageForm.css';
 
 function MessageForm() {
   const [message, setMessage] = useState('');
-  const user = useSelector((user) => user.state);
-  const {} = useContext(AppContext);
+  const user = useSelector((state) => state.user);
+  const { socket, currentRoom, setMessages, messages, privateMemberMsg } =
+    useContext(AppContext);
 
   function getFormattedDate() {
     const date = new Date();
     const year = date.getFullYear();
-    const month = (1 + date.gerMonth()).toString();
+    let month = (1 + date.gerMonth()).toString();
 
     month = month.length > 1 ? month : '0' + month;
-    const day = date.getDate().toString();
+    let day = date.getDate().toString();
 
     day = day.length > 1 ? day : '0' + day;
 
@@ -30,6 +31,14 @@ function MessageForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!message) return;
+    const today = new Date();
+    const minutes =
+      today.getMinutes() < 10 ? '0' + today.getMinutes() : today.getMinutes();
+    const time = today.getHours + ':' + minutes;
+    const roomId = currentRoom;
+    socket.emit('message-room', roomId, message, user, time, todayDate);
+    setMessage('');
   }
   return (
     <>
@@ -44,6 +53,8 @@ function MessageForm() {
                 type="text"
                 placeholder="Your message"
                 disabled={!user}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
               ></Form.Control>
             </Form.Group>
           </Col>
