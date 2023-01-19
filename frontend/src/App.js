@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { AppContext, socket } from './context/appContext';
-import './App.css'
+import './App.css';
 
 function App() {
   const [rooms, setRooms] = useState([]);

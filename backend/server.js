@@ -28,6 +28,22 @@ const io = require('socket.io')(server, {
   },
 });
 
+app.delete('./logout', async (req, res) => {
+  try {
+    const { _id, newMessages } = req.body;
+    const user = await User.findById(_id);
+    user.status = 'offline';
+    user.newMessages = newMessages;
+    await user.save();
+    const members = await User.find();
+    socket.broadcast.emit('new-user', members);
+    res.status(200).send();
+  } catch (e) {
+    console.log(e);
+    res.status(400).send();
+  }
+});
+
 app.get('/rooms', () => {
   res.json(rooms);
 });
@@ -68,6 +84,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('message-room', async (room, content, sender, time, date) => {
+    console.log('new message', content);
     const newMessage = await Message.create({
       content,
       from: sender,
