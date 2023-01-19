@@ -51,18 +51,20 @@ function MessageForm() {
         {!user && <div className="alert alert-danger">Please login</div>}
 
         {user &&
-          messages.map(({ _id: date, messagesByDate }, idx) => {
+          messages.map(({ _id: date, messagesByDate }, idx) => (
             <div key={idx}>
               <p className="alert alert-info text-center message-date-indicator">
                 {date}
               </p>
               {messagesByDate?.map(
-                ({ content, time, from: sender }, idx) => {
-                  <div></div>
-                }
+                ({ content, time, from: sender }, msgIdx) => (
+                  <div className="message" key={msgIdx}>
+                    <p>{content}</p>
+                  </div>
+                )
               )}
-            </div>;
-          })}
+            </div>
+          ))}
       </div>
       <Form onSubmit={handleSubmit}>
         <Row>
