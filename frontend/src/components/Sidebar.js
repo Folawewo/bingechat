@@ -5,17 +5,17 @@ import { AppContext } from '../context/appContext';
 
 function Sidebar() {
   const user = useSelector((state) => state.user);
-  const {
-    socket,
-    setMembers,
-    members,
-    setCurrentRoom,
-    setRooms,
-    privateMmemberMsg,
-    rooms,
-    setPrivateMemberMsg,
-    currentRoom,
-  } = useContext(AppContext);
+  // const {
+  //   socket,
+  //   setMembers,
+  //   members,
+  //   setCurrentRoom,
+  //   setRooms,
+  //   privateMmemberMsg,
+  //   rooms,
+  //   setPrivateMemberMsg,
+  //   currentRoom,
+  // } = useContext(AppContext);
 
   function joinRoom(room, isPublic = true) {
     if (!user) {
