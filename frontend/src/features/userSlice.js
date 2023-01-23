@@ -12,7 +12,9 @@ export const userSlice = createSlice({
         state.newMessages[payload] = 1;
       }
     },
-    resetNotifications: (state, { payload }) => {},
+    resetNotifications: (state, { payload }) => {
+      delete state.newMessages[payload];
+    },
   },
 
   extraReducers: (builder) => {
