@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { ListGroup } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { Col, ListGroup, Row } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppContext } from '../context/appContext';
+import { addNotifications, resetNotifications } from '../features/userSlice';
 
 function Sidebar() {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const {
     socket,
     setMembers,
@@ -28,6 +30,11 @@ function Sidebar() {
       setPrivateMemberMsg(null);
     }
     // dispatch for notifications
+    dispatch(resetNotifications(room));
+
+    socket.off('notifications').on('notifications', (room) => {
+      dispatch(addNotifications(room));
+    });
   }
 
   useEffect(() => {
@@ -87,7 +94,12 @@ function Sidebar() {
               justifyContent: 'space-between',
             }}
           >
-            {room} {currentRoom !== room && <span></span>}
+            {room}{' '}
+            {currentRoom !== room && (
+              <span className="badge rounded-pill bg-primary">
+                {user.newMessages[room]}
+              </span>
+            )}
           </ListGroup.Item>
         ))}
       </ListGroup>
@@ -100,7 +112,12 @@ function Sidebar() {
           onClick={() => handlePrivateMemberMsg(member)}
           disabled={member._id === user._id}
         >
-          {member.name}
+          <Row>
+            <Col xs={2} className="member-status">
+              <img src={member.picture} className="member-status-img" alt="" />
+              {member.status === 'online'}
+            </Col>
+          </Row>
         </ListGroup.Item>;
       })}
     </>
