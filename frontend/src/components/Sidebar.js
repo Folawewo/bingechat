@@ -115,7 +115,7 @@ function Sidebar() {
           <Row>
             <Col xs={2} className="member-status">
               <img src={member.picture} className="member-status-img" alt="" />
-              {member.status === 'online'}
+              {member.status === 'online' ? <i className='fas fa-circle sidebar-online-status'></i> : <}
             </Col>
           </Row>
         </ListGroup.Item>;
