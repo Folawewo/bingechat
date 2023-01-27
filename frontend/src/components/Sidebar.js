@@ -110,12 +110,12 @@ function Sidebar() {
           style={{ cursor: 'pointer' }}
           active={privateMmemberMsg?._id === member?._id}
           onClick={() => handlePrivateMemberMsg(member)}
-          // disabled={member._id === user._id}
+          disabled={member._id === user._id}
         >
           <Row>
             <Col xs={2} className="member-status">
               <img src={member.picture} className="member-status-img" alt="" />
-              {member.status === 'online' ? <i className='fas fa-circle sidebar-online-status'></i> : <}
+              {member.status === 'online' ? <i className='fas fa-circle sidebar-online-status'></i> : <i></i>}
             </Col>
           </Row>
         </ListGroup.Item>;
