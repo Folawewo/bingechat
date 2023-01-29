@@ -122,6 +122,11 @@ function Sidebar() {
                 <i className="fas fa-circle sidebar-offline-status"></i>
               )}
             </Col>
+            <Col xs={9}>
+              {member.name}
+              {member.id === user?._id && 'You'}
+              {member.status}
+            </Col>
           </Row>
         </ListGroup.Item>;
       })}
