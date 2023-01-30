@@ -32,11 +32,11 @@ function Sidebar() {
     }
     // dispatch for notifications
     dispatch(resetNotifications(room));
-
-    socket.off('notifications').on('notifications', (room) => {
-      dispatch(addNotifications(room));
-    });
   }
+
+  socket.off('notifications').on('notifications', (room) => {
+    if (currentRoom !== room) dispatch(addNotifications(room));
+  });
 
   useEffect(() => {
     if (user) {
@@ -124,8 +124,13 @@ function Sidebar() {
             </Col>
             <Col xs={9}>
               {member.name}
-              {member.id === user?._id && 'You'}
-              {member.status}
+              {member._id === user?._id && '(You)'}
+              {member.status === 'offline' && '(Offline)'}
+            </Col>
+            <Col xs={1}>
+              <span className="badge rounded-pill bg-primary">
+                {user.newMessages[orderIds(member._id, user._id)]}
+              </span>
             </Col>
           </Row>
         </ListGroup.Item>;
